@@ -1,0 +1,89 @@
+<app-header></app-header>
+
+<div class="body">
+  <div class="form-reg">
+
+    <h2>Crear tu cuenta de Usuario</h2>
+
+    <br>
+
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Apellido</mat-label>
+            <input matInput formControlName="lastName">
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre</mat-label>
+            <input matInput placeholder=" " value=" " formControlName="name">
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Nombre de Usuario</mat-label>
+            <input matInput placeholder=" " value=" " formControlName="userName">
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Contraseña</mat-label>
+            <input matInput placeholder=" " value=" " formControlName="password">
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Confirmar Contraseña</mat-label>
+            <input matInput placeholder=" " value=" " formControlName="confirmPassword">
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder=" " value=" " formControlName="email">
+            <mat-error *ngIf="form.get('email')?.hasError('required')">
+              Error required
+            </mat-error>
+
+            <mat-error *ngIf="form.get('email')?.hasError('email')">
+              Error mal escrito
+            </mat-error>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Provincia</mat-label>
+            <mat-select formControlName="province">
+              <mat-option *ngFor="let province of provinces" [value]="province.value">
+                {{province.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Pais</mat-label>
+            <mat-select formControlName="country">
+              <mat-option *ngFor="let country of countrys" [value]="country.value">
+                {{country.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <br>
+
+          <button type="submit" mat-raised-button color="primary">Enviar</button>
+
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

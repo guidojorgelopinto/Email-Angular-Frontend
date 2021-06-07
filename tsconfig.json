@@ -4,6 +4,12 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@app/*":["src/app/*"],
+      "@shared/*":["src/app/shared"],
+      "@pages/*":["src/app/components/pages/*"],
+      "@login/*":["src/app/components/pages/login/*"],
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,

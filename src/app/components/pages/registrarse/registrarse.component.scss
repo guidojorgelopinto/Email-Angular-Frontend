@@ -1,0 +1,13 @@
+.body {
+  display: flex;
+  background-color: #f5f5f5;
+  justify-content: center;
+
+  .form-reg {
+    height: 100%;
+    padding: 3rem;
+    align-items: flex-start;
+    text-align: center;
+  }
+}
+

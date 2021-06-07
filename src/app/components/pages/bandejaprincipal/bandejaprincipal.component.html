@@ -1,0 +1,90 @@
+<app-header></app-header>
+<body class="body">
+
+        <!-- Hero -->
+
+    <div class="hero">
+      <div class="hero_banner">
+        <p>BANNER</p>
+      </div>
+
+      <div class="hero__ppal">
+      <P>Guido Jorge Lo Pinto</P>
+      </div>
+
+      <div class="hero___cerrarsesion ">
+        <button class="ancho" mat-raised-button color="primary" (click)="redireccion1()">Cerrar Sesion</button>
+      </div>
+    </div>
+
+        <!-- Fin hero -->
+
+        <!-- Nav -->
+
+    <nav class="sidenav">
+      <div><a routerLink="/bandejaprincial">Bandeja Principal</a></div>
+      <br>
+      <div><a routerLink="/bandejadesalida">Bandeja de Salida</a></div>
+      <br>
+      <div><a routerLink="/mensajenuevo">Mensaje Nuevo</a></div>
+    </nav>
+
+       <!-- Fin nav -->
+
+       <!-- Tabla -->
+
+    <div class="table">
+      <table mat-table [dataSource]="dataSource">
+
+        <!-- Checkbox Column -->
+        <ng-container matColumnDef="select">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <br>
+        <!-- Position Column -->
+        <ng-container matColumnDef="remitente">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Remitente </th>
+          <td mat-cell *matCellDef="let element"> {{element.remitente}} </td>
+        </ng-container>
+        <br>
+        <!-- Name Column -->
+        <ng-container matColumnDef="destinatario">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Destinatario </th>
+          <td mat-cell *matCellDef="let element"> {{element.destinatario}} </td>
+        </ng-container>
+        <br>
+        <!-- Weight Column -->
+        <ng-container matColumnDef="fecha">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+        </ng-container>
+        <br>
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="mensaje">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Mensaje </th>
+          <td mat-cell *matCellDef="let element"> {{element.mensaje}} </td>
+        </ng-container>
+        <br>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selection.toggle(row)">
+        </tr>
+      </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+      <br>
+</body>
+
+<app-footer></app-footer>

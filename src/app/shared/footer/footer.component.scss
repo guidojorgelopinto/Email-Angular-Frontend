@@ -1,0 +1,36 @@
+.footer__container {
+  bottom: 0;
+  width: 100%;
+  background-color: #3a3a3a;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 3% 2% 1% 2%;
+
+
+  &__info {
+    color:#c1c1c1;
+    width: 70%;
+    &--title {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    &--text {
+        margin-right: 2rem;
+        text-align: center;
+    }
+  }
+
+  &__links {
+    margin-left: 2rem;
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+  }
+}
+

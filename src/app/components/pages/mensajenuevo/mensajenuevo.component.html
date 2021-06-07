@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<div class="body">
+  <div class="form-reg">
+
+    <h2>Crear mensaje nuevo</h2>
+
+    <br>
+
+     <form [formGroup]="form" (ngSubmit)="enviar()">
+
+      <mat-form-field class="example-chip-list">
+        <mat-label>Destinatario</mat-label>
+        <mat-chip-list #chipList aria-label="Destinatario">
+          <mat-chip *ngFor="let destinatario of destinatarios" [selectable]="selectable"
+                   [removable]="removable" (removed)="remove(destinatario)">
+            {{destinatario.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New destinatario..."
+                 [matChipInputFor]="chipList"
+                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                 [matChipInputAddOnBlur]="addOnBlur"
+                 (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+
+          <br>
+
+      <mat-form-field class="">
+        <mat-label>Asunto</mat-label>
+        <input matInput formControlName="lastName">
+      </mat-form-field>
+
+          <br>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Escribir..</mat-label>
+        <textarea matInput formControlName="lastName"></textarea>
+      </mat-form-field>
+
+
+          <br>
+
+          <button class="ancho" type="submit" mat-raised-button color="primary">Enviar</button>
+       </form>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<router-outlet></router-outlet>
