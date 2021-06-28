@@ -7,46 +7,54 @@
 
     <br>
 
-     <form [formGroup]="form" (ngSubmit)="enviar()">
+    <form>
 
-      <mat-form-field class="example-chip-list">
-        <mat-label>Destinatario</mat-label>
-        <mat-chip-list #chipList aria-label="Destinatario">
-          <mat-chip *ngFor="let destinatario of destinatarios" [selectable]="selectable"
-                   [removable]="removable" (removed)="remove(destinatario)">
-            {{destinatario.name}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="New destinatario..."
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-      </mat-form-field>
+        <mat-form-field class="mail" appearance="fill">
+          <mat-label>Favorite Destinatarios</mat-label>
+          <mat-chip-list #chipList aria-label="Destinatario selection">
+            <mat-chip
+              *ngFor="let destinatario of destinatarios"
+              [selectable]="selectable"
+              [removable]="removable"
+              (removed)="remove(destinatario)">
+              {{destinatario}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="New destinatario..."
+              #destinatarioInput
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)"
+              formControlName="mail">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let destinatario of filteredDestinatarios | async" [value]="destinatario">
+              {{destinatario}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
 
-          <br>
+            <br>
 
-      <mat-form-field class="">
-        <mat-label>Asunto</mat-label>
-        <input matInput formControlName="lastName">
-      </mat-form-field>
-
-          <br>
-
-      <mat-form-field appearance="fill">
-        <mat-label>Escribir..</mat-label>
-        <textarea matInput formControlName="lastName"></textarea>
-      </mat-form-field>
+        <mat-form-field class="mail">
+          <mat-label>Asunto</mat-label>
+          <input matInput formControlName="asunto">
+        </mat-form-field>
 
 
-          <br>
+        <br>
 
-          <button class="ancho" type="submit" mat-raised-button color="primary">Enviar</button>
-       </form>
+          <mat-form-field class="mail">
+            <textarea matInput rows="5" cols="40" placeholder="text" formControlName="mail"></textarea>
+        </mat-form-field>
+
+        <br>
+
+        <button type="submit" mat-raised-button color="primary">Enviar</button>
+    </form>
   </div>
 </div>
 
 <app-footer></app-footer>
-
-<router-outlet></router-outlet>

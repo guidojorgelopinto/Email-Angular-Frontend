@@ -5,8 +5,12 @@ import { BandejaprincipalComponent } from './bandejaprincipal/bandejaprincipal.c
 import { LoginComponent } from './login/login.component';
 import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { SharedModule } from '@app/shared/shared.module';
-import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
 import { MaterialModule } from './material/material.module';
+import { BandejadesalidaComponent } from './bandejadesalida/bandejadesalida.component';
+import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
+
+
+
 
 
 
@@ -19,9 +23,8 @@ import { MaterialModule } from './material/material.module';
     BandejaprincipalComponent,
     LoginComponent,
     RegistrarseComponent,
-    MensajenuevoComponent,
-
-
+    BandejadesalidaComponent,
+    MensajenuevoComponent
 
   ],
 
@@ -36,7 +39,8 @@ import { MaterialModule } from './material/material.module';
     BandejaprincipalComponent,
     LoginComponent,
     RegistrarseComponent,
-    MensajenuevoComponent,
+    BandejadesalidaComponent,
+    MensajenuevoComponent
 
 
   ],

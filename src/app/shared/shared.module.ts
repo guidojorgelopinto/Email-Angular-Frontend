@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { HeroComponent } from './hero/hero.component';
 
 
 
@@ -10,10 +11,12 @@ import { FooterComponent } from './footer/footer.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
+    HeroComponent,
+
 
   ],
 
   imports: [CommonModule,RouterModule ],
-  exports: [HeaderComponent, FooterComponent ],
+  exports: [HeaderComponent, FooterComponent, HeroComponent],
 })
 export class SharedModule { }

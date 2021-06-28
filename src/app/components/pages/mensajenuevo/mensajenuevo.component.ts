@@ -1,50 +1,53 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup} from '@angular/forms';
-
+import {ElementRef, ViewChild, OnInit, Component } from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material/chips';
-
-
-
-interface Destinatario {
-  name: string;
-}
+import { MatChipInputEvent } from '@angular/material/chips/chip-input';
 
 @Component({
   selector: 'app-mensajenuevo',
   templateUrl: './mensajenuevo.component.html',
-  styleUrls: ['./mensajenuevo.component.scss']
-})
+  styleUrls: ['./mensajenuevo.component.scss']})
 export class MensajenuevoComponent implements OnInit {
-  form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.form = this.fb.group ({
-    })
-  }
-
-  visible = true;
   selectable = true;
   removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  destinatarios: Destinatario[] = [
-    {name: ''},
-  ];
+  separatorKeysCodes: number[] = [ENTER, COMMA];
+  destinatarioCtrl = new FormControl();
+  filteredDestinatarios: Observable<string[]>;
+  destinatarios: string[] = ['guido@gmail.com'];
+  allDestinatarios: string[] = ['lopinto@gmail.com'];
+
+  @ViewChild('destinatarioInput')
+  destinatarioInput!: ElementRef<HTMLInputElement>;
+
+  constructor() {
+
+    this.filteredDestinatarios = this.destinatarioCtrl.valueChanges.pipe(
+        startWith(null),
+        map((destinatario: string | null) => destinatario ? this._filter(destinatario) : this.allDestinatarios.slice()));
+  }
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add our destinatario
     if (value) {
-      this.destinatarios.push({name: value});
+      this.destinatarios.push(value);
     }
 
-    // // Clear the input value
-    // event.chipInput!.clear();
+    // Clear the input value
+    // event.ChipInput!.clear();
+
+    this.destinatarioCtrl.setValue(null);
   }
 
-  remove(destinatario: Destinatario): void {
+  remove(destinatario: string): void {
     const index = this.destinatarios.indexOf(destinatario);
 
     if (index >= 0) {
@@ -52,16 +55,15 @@ export class MensajenuevoComponent implements OnInit {
     }
   }
 
-
-  ngOnInit(): void {
-
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.destinatarios.push(event.option.viewValue);
+    this.destinatarioInput.nativeElement.value = '';
+    this.destinatarioCtrl.setValue(null);
   }
 
-  enviar() {
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-    const contact = this.form.value.contact;
-
-    console.log (contact);
-
+    return this.allDestinatarios.filter(destinatario => destinatario.toLowerCase().includes(filterValue));
   }
 }

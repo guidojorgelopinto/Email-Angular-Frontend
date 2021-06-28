@@ -18,11 +18,11 @@ const ELEMENT_DATA: PeriodicElement[] = [
 ];
 
 @Component({
-  selector: 'app-bandejaprincipal',
-  templateUrl: './bandejaprincipal.component.html',
-  styleUrls: ['./bandejaprincipal.component.scss']
+  selector: 'app-bandejadesalida',
+  templateUrl: './bandejadesalida.component.html',
+  styleUrls: ['./bandejadesalida.component.scss']
 })
-export class BandejaprincipalComponent implements OnInit {
+export class BandejadesalidaComponent implements OnInit {
    @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   displayedColumns: string[] = ['select', 'remitente', 'destinatario', 'fecha', 'mensaje'];
@@ -35,6 +35,10 @@ export class BandejaprincipalComponent implements OnInit {
 
   constructor(private router: Router,) {
 
+  }
+
+  redireccion1() {
+    this.router.navigate(["/login"])
   }
 
   isAllSelected() {

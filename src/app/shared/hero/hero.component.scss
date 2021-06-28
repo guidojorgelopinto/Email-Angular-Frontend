@@ -1,0 +1,31 @@
+.section {
+  background-color: #55688a;
+
+  .hero {
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+
+    &_banner{
+      padding: 20px;
+
+    }
+
+    &__ppal{
+      justify-content: flex-end;
+      }
+
+      &____cerrarsesion {
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10rem;
+
+        }
+    }
+}
+

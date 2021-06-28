@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
 
 @Component({
@@ -8,19 +8,19 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./registrarse.component.scss']
 })
 export class RegistrarseComponent implements OnInit {
-  form: FormGroup;
+  form1: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group ({
+    this.form1 = this.fb.group ({
       lastName: ['', Validators.required],
       name: ['', Validators.required],
       userName: ['', Validators.required],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      email: ['',[Validators.required,Validators.email]],
+      email: ['',Validators.required,Validators.email],
       province: ['', Validators.required],
       country: ['', Validators.required],
-    })
+    });
   }
 
   provinces: Array<any> = [
@@ -41,14 +41,14 @@ export class RegistrarseComponent implements OnInit {
 
   enviar() {
 
-    const lastName = this.form.value.lastName;
-    const name = this.form.value.name;
-    const userName = this.form.value.userName;
-    const password = this.form.value.password;
-    const confirmPassword = this.form.value.confirmPassword;
-    const email = this.form.value.email;
-    const province = this.form.value.province;
-    const country = this.form.value.country;
+    const lastName = this.form1.value.lastName;
+    const name = this.form1.value.name;
+    const userName = this.form1.value.userName;
+    const password = this.form1.value.password;
+    const confirmPassword = this.form1.value.confirmPassword;
+    const email = this.form1.value.email;
+    const province = this.form1.value.province;
+    const country = this.form1.value.country;
 
     console.log (lastName);
     console.log (name);

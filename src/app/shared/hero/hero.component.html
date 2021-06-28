@@ -1,0 +1,17 @@
+<section class="section">
+
+  <div class="hero">
+      <div class="hero_banner">
+        <p>BANNER</p>
+      </div>
+
+      <div class="hero__ppal">
+          <p *matCellDef="let element"> {{element.remitente}} </p>
+      </div>
+
+      <div class="hero___cerrarsesion ">
+        <button class="ancho" mat-raised-button color="primary" (click)="redireccion1()">Cerrar Sesion</button>
+      </div>
+  </div>
+
+</section>
