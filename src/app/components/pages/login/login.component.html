@@ -2,17 +2,17 @@
 <div class="body">
   <div class="login">
 
-    <form [formGroup]="form" (ngSubmit)="ingresar()">
+    <form [formGroup]="form" (ngSubmit)="logIn()">
       <img style="width: 50%;" src="../../../../assets/login.png" alt="login">
 
       <mat-form-field class="ancho" appearance="fill">
         <mat-label>Usuario</mat-label>
-        <input matInput autocomplete="off" formControlName="usuario">
+        <input matInput autocomplete="off" formControlName="userName">
       </mat-form-field>
 
       <mat-form-field class="ancho" appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input type= "password" matInput autocomplete="off" formControlName="password">
+        <input type= "password" matInput autocomplete="off" formControlName="pass">
       </mat-form-field>
 
       <br>
@@ -28,3 +28,5 @@
 </div>
 
 <app-footer></app-footer>
+
+

@@ -14,8 +14,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router,
     ) {
     this.form = this.fb.group ({
-      usuario: ['', Validators.required],
-      password: ['', Validators.required],
+      userName: ['', Validators.required],
+      pass: ['', Validators.required],
     })
   }
   ngOnInit(): void {
@@ -26,13 +26,14 @@ export class LoginComponent implements OnInit {
 
   }
 
-  ingresar() {
+  logIn() {
 
-    const usuario = this.form.value.usuario;
-    const password = this.form.value.password;
+    const userName = this.form.value.userName;
+    const pass = this.form.value.pass;
 
-    console.log (usuario);
-    console.log (password);
+    console.log (userName);
+    console.log (pass);
   }
 
   }
+
