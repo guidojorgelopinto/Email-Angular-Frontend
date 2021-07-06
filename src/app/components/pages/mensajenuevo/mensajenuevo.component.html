@@ -7,54 +7,49 @@
 
     <br>
 
-    <form>
+    <form [formGroup]="form" (ngSubmit)="enviar()">
 
-        <mat-form-field class="mail" appearance="fill">
-          <mat-label>Favorite Destinatarios</mat-label>
-          <mat-chip-list #chipList aria-label="Destinatario selection">
-            <mat-chip
-              *ngFor="let destinatario of destinatarios"
-              [selectable]="selectable"
-              [removable]="removable"
-              (removed)="remove(destinatario)">
-              {{destinatario}}
-              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      <mat-form-field id="mail" class="example-chip-list">
+        <mat-chip-list #chipList aria-label="Destinatario selection" formArrayName="destinatarios">
+            <mat-chip *ngFor="let destinatario of destinatarioControls.value" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(destinatario)">
+                {{destinatario}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
-            <input
-              placeholder="New destinatario..."
-              #destinatarioInput
-              [matAutocomplete]="auto"
-              [matChipInputFor]="chipList"
-              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-              (matChipInputTokenEnd)="add($event)"
-              formControlName="mail">
-          </mat-chip-list>
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
-            <mat-option *ngFor="let destinatario of filteredDestinatarios | async" [value]="destinatario">
-              {{destinatario}}
-            </mat-option>
-          </mat-autocomplete>
-        </mat-form-field>
-
-            <br>
-
-        <mat-form-field class="mail">
-          <mat-label>Asunto</mat-label>
-          <input matInput formControlName="asunto">
-        </mat-form-field>
+            <input placeholder="Nuevo destinatario..."
+          [matChipInputFor]="chipList"
+          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur"
+          (matChipInputTokenEnd)="add($event)">
+  </mat-chip-list>
+    </mat-form-field>
 
 
-        <br>
 
-          <mat-form-field class="mail">
-            <textarea matInput rows="5" cols="40" placeholder="text" formControlName="mail"></textarea>
-        </mat-form-field>
+  <br>
 
-        <br>
+  <mat-form-field id="mail" class="example-chip-list">
+    <mat-label>Asunto</mat-label>
+    <input matInput formControlName="asunto">
+  </mat-form-field>
 
-        <button type="submit" mat-raised-button color="primary">Enviar</button>
-    </form>
-  </div>
+
+    <br>
+
+    <mat-form-field id="mail" class="example-chip-list">
+      <textarea matInput rows="5" cols="40" placeholder="text" formControlName="text144"></textarea>
+    </mat-form-field>
+
+    <br>
+
+
+    <button type="submit" mat-raised-button color="primary">Enviar</button>
+
+
+</form>
+</div>
 </div>
 
 <app-footer></app-footer>
+
+

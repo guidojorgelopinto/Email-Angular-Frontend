@@ -1,69 +1,81 @@
-import {ElementRef, ViewChild, OnInit, Component } from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips/chip-input';
+import { COMMA, ENTER } from "@angular/cdk/keycodes";
+import { Component } from "@angular/core";
+import { MatChipInputEvent } from "@angular/material/chips";
+import {
+  FormControl,
+  FormGroup,
+  FormGroupDirective,
+  NgForm,
+  Validators,
+  FormBuilder,
+  FormArray
+} from "@angular/forms";
 
 @Component({
   selector: 'app-mensajenuevo',
   templateUrl: './mensajenuevo.component.html',
-  styleUrls: ['./mensajenuevo.component.scss']})
-export class MensajenuevoComponent implements OnInit {
+  styleUrls: ['./mensajenuevo.component.scss']
+})
+export class MensajenuevoComponent {
 
+  visible = true;
   selectable = true;
   removable = true;
-  separatorKeysCodes: number[] = [ENTER, COMMA];
-  destinatarioCtrl = new FormControl();
-  filteredDestinatarios: Observable<string[]>;
-  destinatarios: string[] = ['guido@gmail.com'];
-  allDestinatarios: string[] = ['lopinto@gmail.com'];
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  form: FormGroup;
 
-  @ViewChild('destinatarioInput')
-  destinatarioInput!: ElementRef<HTMLInputElement>;
+  constructor(private fb: FormBuilder) {
 
-  constructor() {
+    this.form = this.fb.group ({
+      destinatarios: ['',Validators.required,Validators.email],
+      asunto: ['', Validators.required],
+      text144: ['', Validators.required],
 
-    this.filteredDestinatarios = this.destinatarioCtrl.valueChanges.pipe(
-        startWith(null),
-        map((destinatario: string | null) => destinatario ? this._filter(destinatario) : this.allDestinatarios.slice()));
+
+    });
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    throw new Error("Method not implemented.");
   }
 
+  get destinatarioControls(): FormArray {
+    return this.form.controls.destinatarios as FormArray;
+  }
+
+
+
   add(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
+    const input = event.input;
+    const value = event.value;
 
     // Add our destinatario
-    if (value) {
-      this.destinatarios.push(value);
+    if ((value || "").trim()) {
+      this.destinatarioControls.push(this.fb.control(value));
     }
 
-    // Clear the input value
-    // event.ChipInput!.clear();
-
-    this.destinatarioCtrl.setValue(null);
+    // Reset the input value
+    if (input) {
+      input.value = "";
+    }
   }
 
   remove(destinatario: string): void {
-    const index = this.destinatarios.indexOf(destinatario);
-
+    const index = this.destinatarioControls.value.indexOf(destinatario);
     if (index >= 0) {
-      this.destinatarios.splice(index, 1);
+      this.destinatarioControls.removeAt(index);
     }
   }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.destinatarios.push(event.option.viewValue);
-    this.destinatarioInput.nativeElement.value = '';
-    this.destinatarioCtrl.setValue(null);
-  }
+    enviar() {
 
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+      const destinatario = this.form.value.destinatario;
+      const asunto = this.form.value.asunto;
+      const text144 = this.form.value.text144;
 
-    return this.allDestinatarios.filter(destinatario => destinatario.toLowerCase().includes(filterValue));
+      console.log (destinatario);
+      console.log (asunto);
+      console.log (text144);
+
+      }
   }
-}

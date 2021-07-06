@@ -13,6 +13,9 @@ const routes: Routes = [
   { path: 'registrarse', component: RegistrarseComponent  },
   { path: 'mensajenuevo', component: MensajenuevoComponent  },
   { path: 'bandejadesalida', component: BandejadesalidaComponent },
+  { path: 'mensajenuevo', component: MensajenuevoComponent  },
+
+
 
 ];
 

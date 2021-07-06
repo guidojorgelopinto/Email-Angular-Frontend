@@ -7,11 +7,11 @@ import { HttpClient } from '@angular/common/http';
 export class AuthService {
   user:any
 
-  private URL = 'http://localhost:3000'
+  private URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
   singIn(){
-    return this.http.post(`${this.URL}/user/singin`, this.user)
+    return this.http.post(`${this.URL}/user/singin`, this.user);
   }
 }

@@ -7,13 +7,7 @@ import { RegistrarseComponent } from './registrarse/registrarse.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { MaterialModule } from './material/material.module';
 import { BandejadesalidaComponent } from './bandejadesalida/bandejadesalida.component';
-import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
-
-
-
-
-
-
+import { MensajenuevoComponent } from "./mensajenuevo/mensajenuevo.component";
 
 
 
@@ -26,6 +20,7 @@ import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
     BandejadesalidaComponent,
     MensajenuevoComponent
 
+
   ],
 
   imports: [
@@ -33,6 +28,7 @@ import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
     RouterModule,
     SharedModule,
     MaterialModule
+
   ],
 
   exports: [
@@ -41,7 +37,6 @@ import { MensajenuevoComponent } from './mensajenuevo/mensajenuevo.component';
     RegistrarseComponent,
     BandejadesalidaComponent,
     MensajenuevoComponent
-
 
   ],
 
