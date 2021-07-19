@@ -2,17 +2,17 @@
 <div class="body">
   <div class="login">
 
-    <form [formGroup]="form" (ngSubmit)="logIn()">
+    <form [formGroup]="form" (ngSubmit)="singUp()">
       <img style="width: 50%;" src="../../../../assets/login.png" alt="login">
 
       <mat-form-field class="ancho" appearance="fill">
         <mat-label for="exampleFormControInput" >Usuario</mat-label>
-        <input type="email" matInput autocomplete="off" formControlName="userName">
+        <input type="text" matInput autocomplete="off" formControlName="userName">
       </mat-form-field>
 
       <mat-form-field class="ancho" appearance="fill">
         <mat-label>Contraseña</mat-label>
-        <input type= "password" matInput autocomplete="off" formControlName="pass">
+        <input type= "password" matInput autocomplete="off" formControlName="password">
       </mat-form-field>
 
       <br>

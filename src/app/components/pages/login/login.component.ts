@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/service/auth.service';
+import { AuthService } from '../../../service/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     ) {
     this.form = this.fb.group ({
       userName: ['', Validators.required],
-      pass: ['', Validators.required],
+      password: ['', Validators.required],
     })
   }
   ngOnInit(): void {
@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
 
   redireccion() {
     this.router.navigate(["/registrarse"])
-
   }
 
-  logIn() {
-    console.log(this.form)
-    this.authService.singIn().subscribe( (res:any) => {
+  singUp() {
+
+    // const userName = this.form.get('userName').value
+    // const password = this.form.get('password').value
+    this.authService.singUp("userName", "password").subscribe( (res:any) => {
       console.log(res);
       localStorage.setItem ('token',res.token);
       this.router.navigate(['private']);
@@ -40,4 +41,3 @@ export class LoginComponent implements OnInit {
   }
 
 }
-

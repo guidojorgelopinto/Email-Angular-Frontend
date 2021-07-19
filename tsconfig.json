@@ -9,6 +9,7 @@
       "@shared/*":["src/app/shared"],
       "@pages/*":["src/app/components/pages/*"],
       "@login/*":["src/app/components/pages/login/*"],
+      "@service/*":["src/app/service"],
     },
     "forceConsistentCasingInFileNames": true,
     "strict": true,

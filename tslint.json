@@ -148,6 +148,7 @@
       "app",
       "kebab-case"
     ],
+
     "javascript.implicitProjectConfig.experimentalDecorators": [true]
   }
 }
