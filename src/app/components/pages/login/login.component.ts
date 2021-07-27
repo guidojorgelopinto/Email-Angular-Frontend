@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../service/auth.service'
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -9,34 +10,33 @@ import { AuthService } from '../../../service/auth.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-    ) {
-    this.form = this.fb.group ({
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-    })
-  }
-  ngOnInit(): void {
-  }
+    ) { }
 
   redireccion() {
     this.router.navigate(["/registrarse"])
   }
 
-  singUp() {
-
-    // const userName = this.form.get('userName').value
-    // const password = this.form.get('password').value
-    this.authService.singUp("userName", "password").subscribe( (res:any) => {
-      console.log(res);
-      localStorage.setItem ('token',res.token);
-      this.router.navigate(['private']);
+  ngOnInit(): void {
+    this.form = this.fb.group ({
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
     })
+  }
+
+    singUp() {
+
+      if(this.form.invalid) {
+        return;
+      }
+      this.authService.singUp("userName", "password").pipe(
+        map(token => this.router.navigate(['bandejaprincipal']))
+      ).subscribe()
 
   }
 

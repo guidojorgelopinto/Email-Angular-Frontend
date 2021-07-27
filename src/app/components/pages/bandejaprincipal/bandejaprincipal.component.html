@@ -18,7 +18,8 @@
           <div><router-outlet></router-outlet></div>
           <br>
           <button  mat-raised-button (click)="logSelection()">Eliminar</button>
-        </nav>
+
+         </nav>
 
        <!-- Fin nav -->
 
@@ -28,6 +29,7 @@
       <table mat-table [dataSource]="dataSource">
 
         <!-- Checkbox Column -->
+
         <ng-container matColumnDef="select">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef>
             <mat-checkbox (change)="$event ? masterToggle() : null"
@@ -45,30 +47,30 @@
         <br>
         <br>
         <!-- Position Column -->
-        <ng-container matColumnDef="remitente">
+        <ng-container matColumnDef="from">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Remitente </th>
-          <td mat-cell *matCellDef="let element"> {{element.remitente}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.from}} </td>
         </ng-container>
         <br>
         <br>
         <!-- Name Column -->
-        <ng-container matColumnDef="destinatario">
+        <ng-container matColumnDef="to">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Destinatario </th>
-          <td mat-cell *matCellDef="let element"> {{element.destinatario}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.to}} </td>
         </ng-container>
         <br>
         <br>
         <!-- Weight Column -->
-        <ng-container matColumnDef="fecha">
+        <ng-container matColumnDef="date">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Fecha </th>
-          <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
         </ng-container>
         <br>
         <br>
         <!-- Symbol Column -->
-        <ng-container matColumnDef="mensaje">
+        <ng-container matColumnDef="message">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Mensaje </th>
-          <td mat-cell *matCellDef="let element"> {{element.mensaje}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.message}} </td>
         </ng-container>
         <br>
         <br>
@@ -77,6 +79,8 @@
             (click)="selection.toggle(row)">
         </tr>
       </table>
+
+
         <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
     </div>
 </body>
