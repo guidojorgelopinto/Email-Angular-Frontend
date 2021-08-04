@@ -39,7 +39,7 @@ export class RegistrarseComponent implements OnInit {
   }
 
 
-  enviar() {
+  signUp() {
 
     const lastName = this.form1.value.lastName;
     const name = this.form1.value.name;

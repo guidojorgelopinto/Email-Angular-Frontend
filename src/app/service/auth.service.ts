@@ -6,14 +6,14 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  private URL = 'http://localhost:3000/user';
+  private URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  singUp(userName:any, password:any){
+  signIn(email:any, password:any){
     const data = {
-      userName, password
+      email, password,
     }
-    return this.http.post(`${this.URL}/singin`, data);
+    return this.http.post(`${this.URL}/api/signin`, data);
   }
 }

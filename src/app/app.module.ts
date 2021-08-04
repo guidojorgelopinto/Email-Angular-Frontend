@@ -10,6 +10,9 @@ import { HttpClientModule } from "@angular/common/http";
 import { SharedModule } from './shared/shared.module';
 import { ComponentesModule } from './components/pages/componentes.module';
 import { MaterialModule } from './components/pages/material/material.module';
+import {enableProdMode} from '@angular/core';
+
+enableProdMode();
 
 
 

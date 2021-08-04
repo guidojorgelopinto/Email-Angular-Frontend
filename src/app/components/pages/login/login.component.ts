@@ -24,20 +24,22 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group ({
-      userName: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     })
   }
 
-    singUp() {
+  signIn() {
 
       if(this.form.invalid) {
         return;
       }
-      this.authService.singUp("userName", "password").pipe(
+      this.authService.signIn("email", "password").pipe(
         map(token => this.router.navigate(['bandejaprincipal']))
       ).subscribe()
 
   }
 
 }
+
+
