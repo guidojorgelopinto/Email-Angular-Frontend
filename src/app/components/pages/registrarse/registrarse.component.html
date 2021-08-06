@@ -11,42 +11,42 @@
 
           <mat-form-field class="reg_prop">
             <mat-label>Apellido</mat-label>
-            <input matInput formControlName="lastName">
+            <input matInput placeholder="lastName" value="lastName" formControlName="lastName">
           </mat-form-field>
 
           <br>
 
           <mat-form-field class="reg_prop">
             <mat-label>Nombre</mat-label>
-            <input matInput placeholder=" " value=" " formControlName="name">
+            <input matInput placeholder="name" value="name" formControlName="name">
           </mat-form-field>
 
           <br>
 
           <mat-form-field class="reg_prop">
             <mat-label>Nombre de Usuario</mat-label>
-            <input matInput placeholder=" " value=" " formControlName="userName">
+            <input matInput placeholder="userName" value="userName" formControlName="userName">
           </mat-form-field>
 
           <br>
 
           <mat-form-field class="reg_prop">
             <mat-label>Contraseña</mat-label>
-            <input matInput placeholder=" " value=" " formControlName="password">
+            <input matInput placeholder="password" value="password" formControlName="password">
           </mat-form-field>
 
           <br>
 
           <mat-form-field class="reg_prop">
             <mat-label>Confirmar Contraseña</mat-label>
-            <input matInput placeholder=" " value=" " formControlName="confirmPassword">
+            <input matInput placeholder="confirmPassword" value="confirmPassword" formControlName="confirmPassword">
           </mat-form-field>
 
           <br>
 
           <mat-form-field class="reg_prop">
             <mat-label>Email</mat-label>
-            <input matInput placeholder=" " value=" " formControlName="email">
+            <input matInput placeholder="email" value="email" formControlName="email">
             <mat-error *ngIf="form1.get('email')?.hasError('required')">
               Error required
             </mat-error>
@@ -60,9 +60,9 @@
 
           <mat-form-field appearance="fill"class="reg_prop">
             <mat-label>Provincia</mat-label>
-            <mat-select formControlName="province">
-              <mat-option *ngFor="let province of provinces" [value]="province.value">
-                {{province.viewValue}}
+            <mat-select formControlName="city">
+              <mat-option *ngFor="let city of citys" [value]="city.value">
+                {{city.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>

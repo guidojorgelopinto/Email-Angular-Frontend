@@ -4,18 +4,13 @@ import {  SelectionModel  } from '@angular/cdk/collections';
 import {  MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
+import { MessageI } from '@app/models/message.interface';
 
-export interface MessageParts {
-  from: string;
-  to: string;
-  date: string;
-  message: string;
-}
 
-const MESSAGE_DATA: MessageParts[] = [
-  {from: 'Amigo 1', to: 'Lisa', date: '20/05/21', message: 'Hola guidito 1'},
-  {from: 'Amigo 2', to: 'Lisa', date: '20/05/21', message: 'Hola guidito 2'},
-  {from: 'Amigo 3', to: 'Lisa', date: '20/05/21', message: 'Hola guidito 3'},
+const MESSAGE_DATA: MessageI []= [
+  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
+  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
+  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
 ];
 
 @Component({
@@ -27,12 +22,14 @@ export class BandejaprincipalComponent implements OnInit {
    @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   displayedColumns: string[] = ['select', 'from', 'to', 'date', 'message'];
-  dataSource = new MatTableDataSource<MessageParts>(MESSAGE_DATA);
-  selection = new SelectionModel<MessageParts>(true, []);
+  // dataSource = new MatTableDataSource<MessageI>(MESSAGE_DATA);
+  dataSource!: MatTableDataSource<any>;
+  selection = new SelectionModel<MessageI>(true, []);
+  menssage: any;
 
- ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-  }
+//  ngOnInit() {
+//     this.dataSource.paginator = this.paginator;
+//   }
 
   constructor(private router: Router, private messageService: MessageService) {
 
@@ -56,11 +53,11 @@ export class BandejaprincipalComponent implements OnInit {
   }
 
 
-
-
-
-
-
-
-
+  ngOnInit() {
+    this.messageService.getAllMessages().subscribe((data) => {
+      this.menssage = data;
+      this.dataSource = new MatTableDataSource(this.menssage);
+      // console.log(data);
+    });
+  }
 }

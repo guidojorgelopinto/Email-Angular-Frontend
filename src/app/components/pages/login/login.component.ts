@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../service/auth.service'
+import { UsersService } from '../../../service/users.service'
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private usersService: UsersService
     ) { }
 
   redireccion() {
@@ -27,6 +27,13 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required],
     })
+    this.checkLocalStorage();
+  }
+
+  checkLocalStorage() {
+    if(localStorage.getItem("token")){
+      this.router.navigate(['bandejaprincipal']);
+    }
   }
 
   signIn() {
@@ -34,8 +41,10 @@ export class LoginComponent implements OnInit {
       if(this.form.invalid) {
         return;
       }
-      this.authService.signIn("email", "password").pipe(
-        map(token => this.router.navigate(['bandejaprincipal']))
+      this.usersService.signIn(
+        this.form.controls.email.value,
+        this.form.controls.password.value)
+        .pipe(map(token => this.router.navigate(['bandejaprincipal']))
       ).subscribe()
 
   }

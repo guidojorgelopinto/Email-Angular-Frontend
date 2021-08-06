@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import { UserI } from '../../../models/user.interface';
 
 
 @Component({
@@ -8,22 +9,14 @@ import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
   styleUrls: ['./registrarse.component.scss']
 })
 export class RegistrarseComponent implements OnInit {
-  form1: FormGroup;
+  form1!: FormGroup;
+  user!:UserI;
 
   constructor(private fb: FormBuilder) {
-    this.form1 = this.fb.group ({
-      lastName: ['', Validators.required],
-      name: ['', Validators.required],
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      email: ['',Validators.required,Validators.email],
-      province: ['', Validators.required],
-      country: ['', Validators.required],
-    });
+    this.createForm();
   }
 
-  provinces: Array<any> = [
+  citys: Array<any> = [
     {value: 'ninguno-0', viewValue: 'Ninguno'},
     {value: 'buenosaires-1', viewValue: 'Buenos Aires'},
     {value: 'montevideo-2', viewValue: 'Montevideo'}
@@ -40,23 +33,44 @@ export class RegistrarseComponent implements OnInit {
 
 
   signUp() {
+    if (this.form1.invalid){
+      return Object.values(this.form1.controls).forEach((control: { markAsTouched: () => void; }) => {
+        control.markAsTouched();
+      });
+    }else{
+      this.setUser();
 
-    const lastName = this.form1.value.lastName;
-    const name = this.form1.value.name;
-    const userName = this.form1.value.userName;
-    const password = this.form1.value.password;
-    const confirmPassword = this.form1.value.confirmPassword;
-    const email = this.form1.value.email;
-    const province = this.form1.value.province;
-    const country = this.form1.value.country;
+    }
 
-    console.log (lastName);
-    console.log (name);
-    console.log (userName);
-    console.log (password);
-    console.log (confirmPassword);
-    console.log (email);
-    console.log (province);
-    console.log (country);
   }
-}
+
+    createForm() : void {
+
+    this.form1 = this.fb.group ({
+      lastName: ['', Validators.required],
+      name: ['', Validators.required],
+      userName: ['', Validators.required],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+      email: ['',Validators.required,Validators.email],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+
+    });
+  }
+
+  setUser(): void {
+
+      // this.user = {
+
+      // lastName: this.form1.get('lastName').value,
+      // name: this.form1.get('name').value,
+      // userName: this.form1.get('userName').value,
+      // email: this.form1.get('email').value,
+      // password: this.form1.get('password').value,
+      // confirmPassword: this.form1.get('confirmPassword').value,
+      // city: this.form1.get('city').value,
+      // country: this.form1.get('country').value
+    };
+  }
+

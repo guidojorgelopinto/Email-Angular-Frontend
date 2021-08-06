@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient } from "@angular/common/http";
+import {Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent} from 'rxjs';
+import { MessageI } from '../models/message.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MessageService {
+  controls: any;
 
-  private URL = 'http://localhost:3000/message';
+  url: string = 'http://localhost:3000/api/';
+
 
   constructor(private http: HttpClient) { }
 
-  getMessage(from:any, to:any, date:any, message:any){
-    const data = {
-      from , to, date, message
-    }
-    return this.http.post(`${this.URL}/bandeja`, data);
+  getAllMessages(): Observable<MessageI[]>{
+    let direccion =this.url + "posts" ;
+
+    return this.http.get<MessageI[]>(direccion);
+
   }
+
 }
