@@ -1,17 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import {  SelectionModel  } from '@angular/cdk/collections';
 import {  MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
-import { MessageI } from '@app/models/message.interface';
-
-
-const MESSAGE_DATA: MessageI []= [
-  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
-  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
-  {from: '{{userId}}', to: '{{to}}', date: '{{createdAt}}', message: '{{body}}'},
-];
+import { PostsI} from '../../../models/posts.interface';
 
 @Component({
   selector: 'app-bandejaprincipal',
@@ -19,45 +11,15 @@ const MESSAGE_DATA: MessageI []= [
   styleUrls: ['./bandejaprincipal.component.scss']
 })
 export class BandejaprincipalComponent implements OnInit {
-   @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  displayedColumns: string[] = ['select', 'from', 'to', 'date', 'message'];
-  // dataSource = new MatTableDataSource<MessageI>(MESSAGE_DATA);
-  dataSource!: MatTableDataSource<any>;
-  selection = new SelectionModel<MessageI>(true, []);
-  menssage: any;
 
-//  ngOnInit() {
-//     this.dataSource.paginator = this.paginator;
-//   }
+  posts:PostsI[]=[]
 
-  constructor(private router: Router, private messageService: MessageService) {
+  constructor(private messageService: MessageService) {}
 
 
-  }
-
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
-
-  logSelection() {
-    this.selection.selected.forEach(s => console.log(s.from));
-  }
-
-
-  ngOnInit() {
-    this.messageService.getAllMessages().subscribe((data) => {
-      this.menssage = data;
-      this.dataSource = new MatTableDataSource(this.menssage);
-      // console.log(data);
-    });
-  }
+  ngOnInit(): void{
+      this.messageService.getAll().subscribe(
+        p => this.posts=p
+      );
+    }
 }

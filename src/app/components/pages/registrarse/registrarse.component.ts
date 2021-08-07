@@ -51,7 +51,7 @@ export class RegistrarseComponent implements OnInit {
       name: ['', Validators.required],
       userName: ['', Validators.required],
       password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
+      birthday: ['', Validators.required],
       email: ['',Validators.required,Validators.email],
       city: ['', Validators.required],
       country: ['', Validators.required],
@@ -68,7 +68,7 @@ export class RegistrarseComponent implements OnInit {
       // userName: this.form1.get('userName').value,
       // email: this.form1.get('email').value,
       // password: this.form1.get('password').value,
-      // confirmPassword: this.form1.get('confirmPassword').value,
+      // birthday: this.form1.get('birthday').value,
       // city: this.form1.get('city').value,
       // country: this.form1.get('country').value
     };
