@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
+import { Router } from '@angular/router';
+// import { UsersService } from '../../../service/users.service'
 import { UserI } from '../../../models/user.interface';
 
 
@@ -12,7 +14,11 @@ export class RegistrarseComponent implements OnInit {
   form1!: FormGroup;
   user!:UserI;
 
-  constructor(private fb: FormBuilder) {
+
+  constructor
+  (private fb: FormBuilder,
+  )
+  {
     this.createForm();
   }
 
@@ -33,33 +39,34 @@ export class RegistrarseComponent implements OnInit {
 
 
   signUp() {
-    if (this.form1.invalid){
-      return Object.values(this.form1.controls).forEach((control: { markAsTouched: () => void; }) => {
-        control.markAsTouched();
-      });
-    }else{
-      this.setUser();
-
-    }
-
+    // console.log(this.form1.value)
+    // if (this.form1.invalid){
+    //   return Object.values(this.form1.controls).forEach(control => {
+    //     control.markAsTouched();
+    //   });
+    // }else{
+    //   this.setUser();
+    // }
   }
 
     createForm() : void {
 
-    this.form1 = this.fb.group ({
-      lastName: ['', Validators.required],
-      name: ['', Validators.required],
-      userName: ['', Validators.required],
-      password: ['', Validators.required],
-      birthday: ['', Validators.required],
-      email: ['',Validators.required,Validators.email],
-      city: ['', Validators.required],
-      country: ['', Validators.required],
+    // this.form1 = this.fb.group ({
+    //   lastName: ['', [Validators.required]],
+    //   name: ['', [Validators.required]],
+    //   userName: ['', [Validators.required]],
+    //   password: ['', [Validators.required]],
+    //   birthday: ['', [Validators.required]],
+    //   email: ['',[Validators.required,Validators.email]],
+    //   city: ['', [Validators.required]],
+    //   country: ['', [Validators.required]],
 
-    });
+    // });
   }
 
-  setUser(): void {
+
+
+  setUser():void{
 
       // this.user = {
 
@@ -73,4 +80,3 @@ export class RegistrarseComponent implements OnInit {
       // country: this.form1.get('country').value
     };
   }
-

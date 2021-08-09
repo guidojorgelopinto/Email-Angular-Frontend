@@ -3,18 +3,11 @@ import { Router } from '@angular/router';
 import {  SelectionModel  } from '@angular/cdk/collections';
 import {  MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
+import { MessageService } from '@app/service/message.service';
+import { PostsI} from '../../../models/posts.interface';
 
-export interface PeriodicElement {
-  remitente: string;
-  destinatario: string;
-  fecha: string;
-  mensaje: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {remitente: 'Amigo 1', destinatario: 'Lisa', fecha: '20/05/21', mensaje: 'Hola guidito 1'},
-  {remitente: 'Amigo 2', destinatario: 'Lisa', fecha: '20/05/21', mensaje: 'Hola guidito 2'},
-  {remitente: 'Amigo 3', destinatario: 'Lisa', fecha: '20/05/21', mensaje: 'Hola guidito 3'},
+const messtab: PostsI[] = [
+  
 ];
 
 @Component({
@@ -23,17 +16,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./bandejadesalida.component.scss']
 })
 export class BandejadesalidaComponent implements OnInit {
-   @ViewChild(MatPaginator)
+  posts:PostsI[]=[]
+
+  @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   displayedColumns: string[] = ['select', 'remitente', 'destinatario', 'fecha', 'mensaje'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-  selection = new SelectionModel<PeriodicElement>(true, []);
+  dataSource = new MatTableDataSource<PostsI>(messtab);
+  selection = new SelectionModel<PostsI>(true, []);
 
  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
+    this.messageService.getAll().subscribe(
+      p => this.posts=p
+    );
+
   }
 
-  constructor(private router: Router,) {
+  constructor(private router: Router, private messageService: MessageService) {
 
   }
 
@@ -54,6 +53,6 @@ export class BandejadesalidaComponent implements OnInit {
   }
 
   logSelection() {
-    this.selection.selected.forEach(s => console.log(s.remitente));
+    this.selection.selected.forEach(s => console.log(s.title));
   }
 }

@@ -6,5 +6,6 @@ export interface PostsI {
   createdAt: string;
   updatedAt: string;
   userId: string;
+  to: string;
 
 }

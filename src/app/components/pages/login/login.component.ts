@@ -38,16 +38,16 @@ export class LoginComponent implements OnInit {
 
   signIn() {
 
-      if(this.form.invalid) {
-        return;
-      }
-      this.usersService.signIn(
-        this.form.controls.email.value,
-        this.form.controls.password.value)
-        .pipe(map(token => this.router.navigate(['bandejaprincipal']))
-      ).subscribe()
+    if(this.form.invalid) {
+      return;
+    }
+    this.usersService.signIn(
+      this.form.controls.email.value,
+      this.form.controls.password.value)
+      .pipe(map(token => this.router.navigate(['bandejaprincipal']))
+    ).subscribe()
 
-  }
+}
 
 }
 

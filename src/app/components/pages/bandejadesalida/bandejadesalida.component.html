@@ -47,28 +47,30 @@
         <!-- Position Column -->
         <ng-container matColumnDef="remitente">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Remitente </th>
-          <td mat-cell *matCellDef="let element"> {{element.remitente}} </td>
+          <td mat-cell *matCellDef="let posts"> {{posts.title}} </td>
         </ng-container>
+
+
         <br>
         <br>
         <!-- Name Column -->
         <ng-container matColumnDef="destinatario">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Destinatario </th>
-          <td mat-cell *matCellDef="let element"> {{element.destinatario}} </td>
+          <td mat-cell *matCellDef="let posts"> {{posts.body}} </td>
         </ng-container>
         <br>
         <br>
         <!-- Weight Column -->
         <ng-container matColumnDef="fecha">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Fecha </th>
-          <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
+          <td mat-cell *matCellDef="let posts"> {{posts.creatAt}} </td>
         </ng-container>
         <br>
         <br>
         <!-- Symbol Column -->
         <ng-container matColumnDef="mensaje">
           <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Mensaje </th>
-          <td mat-cell *matCellDef="let element"> {{element.mensaje}} </td>
+          <td mat-cell *matCellDef="let posts"> {{posts.mensaje}} </td>
         </ng-container>
         <br>
         <br>

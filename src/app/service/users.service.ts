@@ -16,26 +16,4 @@ export class UsersService {
     }
     return this.http.post(`${this.URL}/api/signin`, dataIn);
   }
-
-  // signUp(UserI){
-
-  //   return this.http.post(`${this.URL}/api/signup`, UserI);
-  // }
-
-
-
-
-
 }
-
-  // setToken(token: String) {
-  //   this.cookies.set("token", token);
-
-// getUser() {
-  //   return this.http.get("https://reqres.in/api/users/2");
-  // }
-  // getUserLogged() {
-  //   const token = this.getToken();
-  //   // Aquí iría el endpoint para devolver el usuario para un token
-  // }
-

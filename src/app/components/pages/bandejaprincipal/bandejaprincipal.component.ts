@@ -1,7 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {  SelectionModel  } from '@angular/cdk/collections';
-import {  MatTableDataSource } from '@angular/material/table';
-import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
 import { PostsI} from '../../../models/posts.interface';
 

@@ -7,5 +7,5 @@ export interface UserI {
   birthday: string;
   city: string;
   country: string;
-
+  token: string;
 }
