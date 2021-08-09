@@ -1,11 +1,19 @@
+export type Roles = 'USER' | 'ADMIN';
+
 export interface UserI {
-  lastName: string;
-  name: string;
-  userName: string;
   email: string;
   password: string;
-  birthday: string;
-  city: string;
-  country: string;
-  token: string;
 }
+export interface ResponseI {
+lastName: string;
+name: string;
+userName: string;
+birthday: string;
+city: string;
+country: string;
+token: string;
+userId: string;
+role: Roles;
+message: string;
+}
+
