@@ -1,3 +1,4 @@
+
 export interface PostsI {
 
   id: string;

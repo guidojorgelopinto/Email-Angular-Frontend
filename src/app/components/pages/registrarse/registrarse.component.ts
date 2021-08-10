@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { UsersService } from '../../../service/users.service'
-import { UserI } from '../../../models/user.interface';
-
+import { UsersService } from '../../../service/users.service';
+import { UserI } from '../../../models/users.interface'
 
 @Component({
   selector: 'app-registrarse',
@@ -11,72 +10,60 @@ import { UserI } from '../../../models/user.interface';
   styleUrls: ['./registrarse.component.scss']
 })
 export class RegistrarseComponent implements OnInit {
-  form1!: FormGroup;
-  user!:UserI;
-
+  registerForm: FormGroup;
 
   constructor
   (private fb: FormBuilder,
-  )
-  {
-    this.createForm();
-  }
+  private usersService: UsersService,
+  private router: Router,
+  )  {
+
+    this.registerForm = this.fb.group ({
+      lastName: ['lo pinto', [Validators.required]],
+      name: ['guido', [Validators.required]],
+      userName: ['guidojorge', [Validators.required]],
+      password: ['123456', [Validators.required]],
+      birthday: ['15-01-1989', [Validators.required]],
+      email: ['guido@gmail.com',[Validators.required,Validators.email]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+    });
+   }
+
 
   citys: Array<any> = [
-    {value: 'ninguno-0', viewValue: 'Ninguno'},
-    {value: 'buenosaires-1', viewValue: 'Buenos Aires'},
-    {value: 'montevideo-2', viewValue: 'Montevideo'}
+    {value: '0', viewValue: 'Ninguno'},
+    {value: '1', viewValue: 'Buenos Aires'},
+    {value: '2', viewValue: 'Montevideo'}
   ];
 
   countrys: Array<any> = [
-    {value: 'ninguno-0', viewValue: 'Ninguno'},
-    {value: 'argentina-1', viewValue: 'Argentina'},
-    {value: 'uruguay-2', viewValue: 'Uruguay'}
+    {value: '0', viewValue: 'Ninguno'},
+    {value: '1', viewValue: 'Argentina'},
+    {value: '2', viewValue: 'Uruguay'}
   ];
 
-  ngOnInit(): void {
+  ngOnInit(): void {  }
+
+  singUp() {
+
+    const registerUser : UserI = {
+      lastName: this.registerForm.value.lastName,
+      name: this.registerForm.value.name,
+      userName: this.registerForm.value.userName,
+      password: this.registerForm.value.password,
+      birthday: this.registerForm.value.birthday,
+      email: this.registerForm.value.email,
+      country: this.registerForm.value.country,
+      city: this.registerForm.value.city,
+      token: '',
+      userId: 0,
+      role: 'USER',
+      message: ''
+    }
+
+    // this.usersService.singUp(registerUser);
   }
 
 
-  signUp() {
-    // console.log(this.form1.value)
-    // if (this.form1.invalid){
-    //   return Object.values(this.form1.controls).forEach(control => {
-    //     control.markAsTouched();
-    //   });
-    // }else{
-    //   this.setUser();
-    // }
-  }
-
-    createForm() : void {
-
-    // this.form1 = this.fb.group ({
-    //   lastName: ['', [Validators.required]],
-    //   name: ['', [Validators.required]],
-    //   userName: ['', [Validators.required]],
-    //   password: ['', [Validators.required]],
-    //   birthday: ['', [Validators.required]],
-    //   email: ['',[Validators.required,Validators.email]],
-    //   city: ['', [Validators.required]],
-    //   country: ['', [Validators.required]],
-
-    // });
-  }
-
-
-
-  setUser():void{
-
-      // this.user = {
-
-      // lastName: this.form1.get('lastName').value,
-      // name: this.form1.get('name').value,
-      // userName: this.form1.get('userName').value,
-      // email: this.form1.get('email').value,
-      // password: this.form1.get('password').value,
-      // birthday: this.form1.get('birthday').value,
-      // city: this.form1.get('city').value,
-      // country: this.form1.get('country').value
-    };
-  }
+}

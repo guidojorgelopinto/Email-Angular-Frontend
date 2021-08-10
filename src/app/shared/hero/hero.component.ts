@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersService } from '@app/service/users.service';
+import { BehaviorSubject } from "rxjs";
 
 export interface PeriodicElement {
   remitente: string;
@@ -16,7 +18,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class HeroComponent implements OnInit {
 
-  constructor(private router: Router,) { }
+  constructor(private router: Router, private usersService: UsersService) { }
 
   redireccion1() {
     this.router.navigate(["/login"])

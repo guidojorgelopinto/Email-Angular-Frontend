@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from '@app/service/message.service';
-import { PostsI} from '../../../models/posts.interface';
+import { PostsI } from '../../../models/posts.interface';
 
 @Component({
   selector: 'app-bandejaprincipal',
@@ -16,7 +16,7 @@ export class BandejaprincipalComponent implements OnInit {
 
   ngOnInit(): void{
       this.messageService.getAll().subscribe(
-        p => this.posts=p
+        p => this.posts=p,
       );
     }
 }
