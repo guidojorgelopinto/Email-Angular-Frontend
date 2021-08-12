@@ -1,15 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsersService } from '@app/service/users.service';
-import { BehaviorSubject } from "rxjs";
-
-export interface PeriodicElement {
-  remitente: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {remitente: 'Amigo 1'},
-];
+import { UserI } from '../../models/users.interface'
 
 @Component({
   selector: 'app-hero',
@@ -18,13 +10,19 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class HeroComponent implements OnInit {
 
-  constructor(private router: Router, private usersService: UsersService) { }
+  users:UserI[] = []
 
-  redireccion1() {
-    this.router.navigate(["/login"])
-  }
+  constructor(private router:Router, private usersService: UsersService) {}
 
-  ngOnInit(): void {
-  }
+
+  ngOnInit(): void{
+      this.usersService.getAll().subscribe(
+        (        u: UserI[]) => this.users = u,
+      );
+    }
+
+    signOut() {
+
+    }
 
 }

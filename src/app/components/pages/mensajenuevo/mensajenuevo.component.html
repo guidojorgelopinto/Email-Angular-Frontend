@@ -5,48 +5,39 @@
 
     <h2>Crear mensaje nuevo</h2>
 
-    <br>
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
 
-    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <mat-form-field class="reg_prop">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="email" value="email" formControlName="email">
+        <mat-error *ngIf="messageForm.get('email')?.hasError('required')">
+          Error required
+        </mat-error>
 
-      <mat-form-field id="mail" class="example-chip-list">
-        <mat-chip-list #chipList aria-label="Destinatario selection" formArrayName="destinatarios">
-            <mat-chip *ngFor="let destinatario of destinatarioControls.value" [selectable]="selectable" [removable]="removable"
-                (removed)="remove(destinatario)">
-                {{destinatario}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-            <input placeholder="Nuevo destinatario..."
-          [matChipInputFor]="chipList"
-          [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-          [matChipInputAddOnBlur]="addOnBlur"
-          (matChipInputTokenEnd)="add($event)">
-  </mat-chip-list>
-    </mat-form-field>
+        <mat-error *ngIf="messageForm.get('email')?.hasError('email')">
+          Error mal escrito
+        </mat-error>
+      </mat-form-field>
 
+        <br>
 
-  <br>
+        <mat-form-field id="mail" class="example-chip-list">
+          <mat-label>Asunto</mat-label>
+          <input matInput formControlName="asunto">
+        </mat-form-field>
 
-  <mat-form-field id="mail" class="example-chip-list">
-    <mat-label>Asunto</mat-label>
-    <input matInput formControlName="asunto">
-  </mat-form-field>
+        <br>
 
+        <mat-form-field id="mail" class="example-chip-list">
+          <textarea matInput rows="5" cols="40" placeholder="text" formControlName="text144"></textarea>
+        </mat-form-field>
 
-    <br>
+        <br>
 
-    <mat-form-field id="mail" class="example-chip-list">
-      <textarea matInput rows="5" cols="40" placeholder="text" formControlName="text144"></textarea>
-    </mat-form-field>
+        <button type="sendMessage" mat-raised-button color="primary">Enviar</button>
+    </form>
 
-    <br>
-
-
-    <button type="submit" mat-raised-button color="primary">Enviar</button>
-
-
-</form>
-</div>
+  </div>
 </div>
 
 <app-footer></app-footer>

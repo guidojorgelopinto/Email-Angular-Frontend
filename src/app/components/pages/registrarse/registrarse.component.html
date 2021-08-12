@@ -7,7 +7,7 @@
 
     <br>
 
-    <form [formGroup]="registerForm" (ngSubmit)="singUp()">
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()">
 
           <mat-form-field class="reg_prop">
             <mat-label>Apellido</mat-label>
@@ -38,8 +38,8 @@
           <br>
 
           <mat-form-field class="reg_prop">
-            <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput placeholder="birthday" value="birthday" formControlName="birthday">
+            <mat-label>Confirme su contraseña</mat-label>
+            <input matInput placeholder="password2" value="password2" formControlName="password2">
           </mat-form-field>
 
           <br>

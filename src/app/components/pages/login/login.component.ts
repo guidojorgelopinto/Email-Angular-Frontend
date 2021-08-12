@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsersService } from '../../../service/users.service'
+import { UsersService } from '../../../service/users.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +9,8 @@ import { UsersService } from '../../../service/users.service'
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+
+  _userService!: UsersService;
 
   form = this.fb.group ({
     email: ['', Validators.required],
@@ -37,15 +39,3 @@ export class LoginComponent implements OnInit {
 
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

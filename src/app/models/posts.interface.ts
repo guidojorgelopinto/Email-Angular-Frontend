@@ -8,5 +8,6 @@ export interface PostsI {
   updatedAt: string;
   userId: string;
   to: string;
+  token: string;
 
 }

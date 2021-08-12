@@ -6,13 +6,12 @@ export interface UserI {
   lastName: string;
   name: string;
   userName: string;
-  birthday: string;
+  password2: string;
   city: string;
   country: string;
   token: string;
   userId: number;
   role: Roles;
-  message: string;
 }
 
 

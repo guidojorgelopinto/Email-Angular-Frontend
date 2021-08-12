@@ -5,12 +5,12 @@
         <p>BANNER</p>
       </div>
 
-      <div class="hero__ppal">
-          <p *matCellDef="let element"> {{element.remitente}} </p>
+      <div class="hero__ppal" *ngFor="let user of users">
+          <p>{{user.userId}}</p>
       </div>
 
       <div class="hero___cerrarsesion ">
-        <button class="ancho" mat-raised-button color="primary" (click)="redireccion1()">Cerrar Sesion</button>
+        <button class="ancho" mat-raised-button color="primary" (click)="signOut()">Cerrar Sesion</button>
       </div>
   </div>
 

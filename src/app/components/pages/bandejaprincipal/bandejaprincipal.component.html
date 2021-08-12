@@ -1,7 +1,5 @@
 <app-header></app-header>
 <app-hero></app-hero>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-
 <body class="body">
 
         <!-- Nav -->
@@ -27,37 +25,61 @@
 
        <!-- Tabla -->
 
+    <div class="table">
+      <table mat-table [dataSource]="dataSource">
 
+        <ng-container matColumnDef="select">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef>
+            <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="selection.hasValue() && isAllSelected()"
+                          [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+          </th>
+          <td mat-cell *matCellDef="let row">
+            <mat-checkbox (click)="$event.stopPropagation()"
+                          (change)="$event ? selection.toggle(row) : null"
+                          [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <br>
+        <br>
 
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Destinatario</th>
-            <th scope="col">Remitente</th>
-            <th scope="col">Asunto</th>
-            <th scope="col">Mensaje</th>
-            <th scope="col">Fecha</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let post of posts">
-            <!-- <th scope="row">{{post.user_id}}</th> -->
-            <td>{{post.userId}}</td>
-            <td>{{post.userId}}</td>
-            <td>{{post.title}}</td>
-            <td>{{post.body}}</td>
-            <td>{{post.createdAt}}</td>
-          </tr>
-        </tbody>
+        <ng-container matColumnDef="from">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Remitente </th>
+          <td mat-cell *matCellDef="let PostsI"> {{PostsI.from}} </td>
+        </ng-container>
+        <br>
+        <br>
+
+        <ng-container matColumnDef="to">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Destinatario </th>
+          <td mat-cell *matCellDef="let PostsI"> {{PostsI.to}} </td>
+        </ng-container>
+        <br>
+        <br>
+
+        <ng-container matColumnDef="date">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Fecha </th>
+          <td mat-cell *matCellDef="let PostsI"> {{PostsI.date}} </td>
+        </ng-container>
+        <br>
+        <br>
+
+        <ng-container matColumnDef="message">
+          <th id="mat-header-cell" mat-header-cell *matHeaderCellDef> Mensaje </th>
+          <td mat-cell *matCellDef="let PostsI"> {{PostsI.body}} </td>
+        </ng-container>
+        <br>
+        <br>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+            (click)="selection.toggle(row)">
+        </tr>
       </table>
 
 
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+    </div>
 </body>
-
 <app-footer></app-footer>

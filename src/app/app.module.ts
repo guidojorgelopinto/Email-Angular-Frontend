@@ -23,8 +23,6 @@ enableProdMode();
 @NgModule({
   declarations: [
     AppComponent,
-
-
   ],
   imports: [
     BrowserModule,

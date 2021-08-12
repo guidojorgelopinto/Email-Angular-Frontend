@@ -11,6 +11,7 @@ import { UserI } from '../../../models/users.interface'
 })
 export class RegistrarseComponent implements OnInit {
   registerForm: FormGroup;
+  complete= false;
 
   constructor
   (private fb: FormBuilder,
@@ -19,12 +20,12 @@ export class RegistrarseComponent implements OnInit {
   )  {
 
     this.registerForm = this.fb.group ({
-      lastName: ['lo pinto', [Validators.required]],
-      name: ['guido', [Validators.required]],
-      userName: ['guidojorge', [Validators.required]],
-      password: ['123456', [Validators.required]],
-      birthday: ['15-01-1989', [Validators.required]],
-      email: ['guido@gmail.com',[Validators.required,Validators.email]],
+      lastName: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      userName: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+      password2: ['', [Validators.required]],
+      email: ['',[Validators.required,Validators.email]],
       city: ['', [Validators.required]],
       country: ['', [Validators.required]],
     });
@@ -32,38 +33,46 @@ export class RegistrarseComponent implements OnInit {
 
 
   citys: Array<any> = [
-    {value: '0', viewValue: 'Ninguno'},
-    {value: '1', viewValue: 'Buenos Aires'},
-    {value: '2', viewValue: 'Montevideo'}
+    {value: 'Ninguno', viewValue: 'Ninguno'},
+    {value: 'Cordoba', viewValue: 'Cordoba'},
+    {value: 'Montevideo', viewValue: 'Montevideo'}
   ];
 
   countrys: Array<any> = [
-    {value: '0', viewValue: 'Ninguno'},
-    {value: '1', viewValue: 'Argentina'},
-    {value: '2', viewValue: 'Uruguay'}
+    {value: 'Ninguno', viewValue: 'Ninguno'},
+    {value: 'Argentina', viewValue: 'Argentina'},
+    {value: 'Uruguay', viewValue: 'Uruguay'}
   ];
 
   ngOnInit(): void {  }
 
-  singUp() {
+  signUp() {
 
     const registerUser : UserI = {
       lastName: this.registerForm.value.lastName,
       name: this.registerForm.value.name,
       userName: this.registerForm.value.userName,
       password: this.registerForm.value.password,
-      birthday: this.registerForm.value.birthday,
+      password2: this.registerForm.value.password2,
       email: this.registerForm.value.email,
       country: this.registerForm.value.country,
       city: this.registerForm.value.city,
       token: '',
       userId: 0,
-      role: 'USER',
-      message: ''
+      role: 'USER'
     }
+    console.log(registerUser);
 
-    // this.usersService.singUp(registerUser);
+    this.usersService.signUp(registerUser);
+    this.falselogin();
+
   }
 
-
+  falselogin(){
+    this.complete= true;
+    setTimeout(()=>{
+      this.router.navigate(['/login']);
+    },1500
+    );
+  }
 }
