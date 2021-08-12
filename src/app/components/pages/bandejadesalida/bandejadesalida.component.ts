@@ -21,7 +21,7 @@ export class BandejadesalidaComponent implements OnInit {
 
   ngOnInit(): void{
       this.messageService.getAll().subscribe(
-        p => this.posts=p,
+        (        p: PostsI[]) => this.posts=p,
       );
     }
 }

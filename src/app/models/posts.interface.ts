@@ -1,6 +1,5 @@
 
 export interface PostsI {
-
   id: string;
   title: string;
   body: string;

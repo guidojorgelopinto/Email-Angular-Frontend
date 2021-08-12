@@ -13,9 +13,6 @@ const helper = new JwtHelperService();
 
 export class UsersService {
 
-
-
-
   [x: string]: any;
   public loggedIn = new BehaviorSubject<boolean>(false);
 

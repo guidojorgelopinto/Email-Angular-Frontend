@@ -5,22 +5,8 @@ import {  MatTableDataSource } from '@angular/material/table';
 import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
 import { PostsI } from '../../../models/posts.interface';
+import { Observable } from 'rxjs';
 
-
-
-const MESSAGE_DATA: PostsI []= [
-  // {id: 'string', to: 'string', createdAt: 'string', body: 'string',}
-];
-
-
-// id: string;
-// title: string;
-// body: string;
-// createdAt: string;
-// updatedAt: string;
-// userId: string;
-// to: string;
-// token: string;
 
 @Component({
   selector: 'app-bandejaprincipal',
@@ -28,51 +14,49 @@ const MESSAGE_DATA: PostsI []= [
   styleUrls: ['./bandejaprincipal.component.scss']
 })
 export class BandejaprincipalComponent implements OnInit {
+    [x: string]: any;
 
-  message: PostsI[] = [];
+    constructor(private router: Router, private messageService: MessageService) {}
 
-  constructor(private router: Router, private messageService: MessageService) {}
+    ELEMENT_DATA!: PostsI [];
+    displayedColumns: string[] = ['select', 'id', 'title', 'body', 'userId'];
+    dataSource = new MatTableDataSource<PostsI>(this.ELEMENT_DATA);
+    selection = new SelectionModel<PostsI>(true, []);
 
-   @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-  displayedColumns: string[] = ['select', 'from', 'to', 'date', 'body'];
-  dataSource = new MatTableDataSource<PostsI>(MESSAGE_DATA);
-  selection = new SelectionModel<PostsI>(true, []);
-  menssage: PostsI[] = [];
+    /** Whether the number of selected elements matches the total number of rows. */
+    isAllSelected() {
+      const numSelected = this.selection.selected.length;
+      const numRows = this.dataSource.data.length;
+      return numSelected === numRows;
+    }
 
-//  ngOnInit() {
-//     this.dataSource.paginator = this.paginator;
-//   }
+    /** Selects all rows if they are not all selected; otherwise clear selection. */
+    masterToggle() {
+      if (this.isAllSelected()) {
+        this.selection.clear();
+        return;
+      }
 
+      this.selection.select(...this.dataSource.data);
+    }
 
+    /** The label for the checkbox on the passed row */
+    checkboxLabel(row?: PostsI): string {
+      if (!row) {
+        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
+      }
+      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId}`;
+    }
 
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
+    ngOnInit(){
+      this.getAllPosts();
+      this.deleteAll();
+    }
 
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
-  }
+    public getAllPosts() {
+      let resp = this.messageService.bring();
+      resp.subscribe(report =>this.dataSource.data = report as PostsI[])
 
-  // logSelection() {
-  //   this.selection.selected.forEach(s => console.log(s.from));
-  // }
+    }
 
-
-  ngOnInit(): void{
-    // this.messageService.getAllMessages().subscribe((data) => {
-    //   this.menssage = data;
-    //   this.dataSource = new MatTableDataSource(this.menssage);
-    //   // console.log(data);
-    // });
-
-    this.messageService.getAll().subscribe(
-      m => this.message=m
-    );
-
-  }
 }

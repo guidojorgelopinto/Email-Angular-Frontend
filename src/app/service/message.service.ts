@@ -7,21 +7,30 @@ import { BehaviorSubject, Observable, pipe, throwError } from "rxjs";
   providedIn: 'root'
 })
 export class MessageService {
+  [x: string]: any;
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   private URL = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<PostsI[]>{
+  public bring() {
     return this.http.get<PostsI[]>(`${this.URL}/api/posts/`);
   }
 
-  //Enviar mensaje nuevo
+  delete(id:any): Observable<any> {
+    return this.http.delete(`${this.URL}/api/posts/id`);
+  }
 
-  sendMessage(authData: PostsI) {
+  deleteAll(): Observable<any> {
+    return this.http.delete(`${this.URL}/api/posts/`);
+  }
+
+   //Enviar mensaje nuevo
+
+   sendMessage(authData: PostsI) {
     return this.http
-    .post<PostsI>(`${this.URL}/api/posts/:id/`, authData)
+    .post<PostsI>(`${this.URL}/api/posts/`, authData)
     .subscribe((res: PostsI) => {
       console.log(res);
       // this.saveToken(res.token);
@@ -30,6 +39,7 @@ export class MessageService {
     });
       // catchError((err) => this.handleError(err))
   }
+
 
   private checkToken(): void {
 
@@ -41,8 +51,26 @@ export class MessageService {
     localStorage.setItem("token", token);
   }
 
-  //Traer Mensajes por token
 
+  // getAll(): Observable<any> {
+  //   return this.http.get(this.URL);
+  // }
 
+  // get(id): Observable<any> {
+  //   return this.http.get(`${this.URL}/${id}`);
+  // }
+
+  // create(data): Observable<any> {
+  //   return this.http.post(this.URL, data);
+  // }
+
+  // update(id, data): Observable<any> {
+  //   return this.http.put(`${this.URL}/${id}`, data);
+  // }
+
+  // findByTitle(title): Observable<any> {
+  //   return this.http.get(`${this.URL}?title=${title}`);
+  // }
+// }
 
   }
