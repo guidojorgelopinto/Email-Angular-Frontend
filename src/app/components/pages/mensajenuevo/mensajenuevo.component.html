@@ -7,9 +7,9 @@
 
     <form [formGroup]="messageForm" (ngSubmit)="sendMessage()">
 
-      <mat-form-field class="reg_prop">
+      <mat-form-field id="mail" class="example-chip-list">
         <mat-label>Email</mat-label>
-        <input matInput placeholder="email" value="email" formControlName="email">
+        <input matInput placeholder="email" value="" formControlName="email">
         <mat-error *ngIf="messageForm.get('email')?.hasError('required')">
           Error required
         </mat-error>
@@ -19,11 +19,16 @@
         </mat-error>
       </mat-form-field>
 
+        <mat-form-field id="mail" class="example-chip-list">
+          <mat-label>Asunto</mat-label>
+          <input matInput formControlName="asunto">
+        </mat-form-field>
+
         <br>
 
-        <mat-form-field id="mail" class="example-chip-list">
-          <textarea matInput rows="5" cols="40" placeholder="text" formControlName="text144"></textarea>
-        </mat-form-field>
+        <mat-form-field id="mail" hintLabel="Max 144 characters">
+          <textarea matInput rows="5" cols="40"  #txtarea matInput  maxLength="144" placeholder="Escribir.." formControlName="asunto"></textarea>
+         </mat-form-field>
 
         <br>
 
@@ -34,5 +39,3 @@
 </div>
 
 <app-footer></app-footer>
-
-

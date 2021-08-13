@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PostsI } from '../models/posts.interface';
 import { BehaviorSubject, Observable, pipe, throwError } from "rxjs";
 import { UsersService } from '../service/users.service';
+import { catchError, map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -25,18 +26,18 @@ export class MessageService {
 
    //Enviar mensaje nuevo
 
-   sendMessage(authData: PostsI) {
-    return this.http
-    .post<PostsI>(`${this.URL}/api/posts/`, authData)
-    .subscribe((res: PostsI) => {
-      console.log(res);
-      // this.saveToken(res.token);
-      // this.loggedIn.next(true);
-      // return res;
-    });
-      // catchError((err) => this.handleError(err))
+      sendMessage(authData: PostsI) {
+        return this.http
+        .post<PostsI>(`${this.URL}/api/posts/`, authData)
+        .pipe(
+          map((res: PostsI) => {
+            this.saveToken(res.token);
+            this.loggedIn.next(true);
+            return res;
+          }),
+    );
+          catchError((err) => this.handleError(err))
   }
-
 
   private checkToken(): void {
 

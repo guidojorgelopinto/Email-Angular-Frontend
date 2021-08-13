@@ -14,49 +14,49 @@ import { Observable } from 'rxjs';
   styleUrls: ['./bandejaprincipal.component.scss']
 })
 export class BandejaprincipalComponent implements OnInit {
-    [x: string]: any;
 
-    constructor(private router: Router, private messageService: MessageService) {}
+  [x: string]: any;
 
-    ELEMENT_DATA!: PostsI [];
-    displayedColumns: string[] = ['select', 'id', 'title', 'body', 'userId'];
-    dataSource = new MatTableDataSource<PostsI>(this.ELEMENT_DATA);
-    selection = new SelectionModel<PostsI>(true, []);
+  constructor(private router: Router, private messageService: MessageService) {}
 
-    /** Whether the number of selected elements matches the total number of rows. */
-    isAllSelected() {
-      const numSelected = this.selection.selected.length;
-      const numRows = this.dataSource.data.length;
-      return numSelected === numRows;
+  ELEMENT_DATA!: PostsI [];
+  displayedColumns: string[] = ['select', 'to', 'userId', 'createdAt', 'body'];
+  dataSource = new MatTableDataSource<PostsI>(this.ELEMENT_DATA);
+  selection = new SelectionModel<PostsI>(true, []);
+
+  /** Whether the number of selected elements matches the total number of rows. */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+  /** Selects all rows if they are not all selected; otherwise clear selection. */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+      return;
     }
 
-    /** Selects all rows if they are not all selected; otherwise clear selection. */
-    masterToggle() {
-      if (this.isAllSelected()) {
-        this.selection.clear();
-        return;
-      }
+    this.selection.select(...this.dataSource.data);
+  }
 
-      this.selection.select(...this.dataSource.data);
+  /** The label for the checkbox on the passed row */
+  checkboxLabel(row?: PostsI): string {
+    if (!row) {
+      return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
+    return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId}`;
+  }
 
-    /** The label for the checkbox on the passed row */
-    checkboxLabel(row?: PostsI): string {
-      if (!row) {
-        return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
-      }
-      return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.userId}`;
-    }
+  ngOnInit(){
+    this.getId();
+    // this.deleteAll();
+    // this.delete();
+  }
 
-    ngOnInit(){
-      this.getAllPosts();
-      // this.deleteAll();
-    }
-
-    public getAllPosts() {
-      let resp = this.messageService.bring();
-      resp.subscribe(report =>this.dataSource.data = report as PostsI[])
-
-    }
-
+  public getId() {
+    let resp = this.messageService.bring();
+    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
+  }
 }

@@ -14,13 +14,14 @@ export class MensajenuevoComponent {
   messageForm: FormGroup;
   complete= false;
 
+
   constructor
   (private fb: FormBuilder,
     private messageService: MessageService,
     private router: Router,
   ) {
     this.messageForm = this.fb.group ({
-      userId: ['guido@gmail.com', [Validators.required]],
+      email: ['guido@gmail.com', [Validators.required]],
       asunto: ['Prueba', Validators.required],
       text144: ['primerMesaje', Validators.required],
     });
@@ -32,27 +33,26 @@ export class MensajenuevoComponent {
   sendMessage() {
 
       const outMessage : PostsI = {
-        userId: this.messageForm.value.email,
-        title: this.messageForm.value.lastName,
-        body: this.messageForm.value.name,
+        to: this.messageForm.value.email,
+        title: this.messageForm.value.asunto,
+        body: this.messageForm.value.text144,
         id: "",
         createdAt: "",
         updatedAt: "",
-        to: "",
+        userId:"",
         token: "",
       }
       console.log(outMessage);
 
       this.messageService.sendMessage(outMessage);
       this.falselogin();
-
     }
 
     falselogin(){
       this.complete= true;
       setTimeout(()=>{
         this.router.navigate(['/bandejaprincipal']);
-      },1500
+      },1600
       );
     }
-  }
+}
