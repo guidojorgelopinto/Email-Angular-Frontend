@@ -49,21 +49,17 @@ export class BandejaprincipalComponent implements OnInit {
 
   ngOnInit(){
     this.getId();
-    this.delId();
   }
 
   public getId() {
     let resp = this.messageService.bring();
-    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
+    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[]);
   }
 
   public delId() {
+    console.log('delId')
     let resp = this.messageService.bring();
-    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
+    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[]);
+    this.getId();
   }
-
-
-
-
-
 }

@@ -26,26 +26,29 @@ export class MessageService {
 
    //Enviar mensaje nuevo
 
-  sendMessage(authData: PostsI) {
-    return this.http
-    .post<PostsI>(`${this.URL}/api/posts/`, authData)
-    .pipe(
-      map((res: PostsI) => {
-        this.saveToken(res.token);
-        this.loggedIn.next(true);
-        return res;
-      }),
+  // sendMessage(authData: PostsI) {
+  //   return this.http
+  //   .post<PostsI>(`${this.URL}/api/posts/:id`, authData)
+  //   .pipe(
+  //     map((res: PostsI) => {
+  //       this.saveToken(res.token);
+  //       this.loggedIn.next(true);
+  //       return res;
+  //     }),
 
-  );
-        catchError((err) => this.handleError(err))
-  }
+  // );
+  // }
+
+  sendMessage(id: any) {
+    return this.http
+    .post(`${this.URL}/api/posts/${id}`)
+}
 
      //Eliminar mensaje
 
-  delId(authData: PostsI) {
-    return this.http
-    .delete<PostsI>(`${this.URL}/api/posts/`)
-      catchError((err) => this.handleError(err))
+     delId(id: any) {
+      return this.http
+      .delete(`${this.URL}/api/posts/${id}`)
   }
 
   private checkToken(): void {
