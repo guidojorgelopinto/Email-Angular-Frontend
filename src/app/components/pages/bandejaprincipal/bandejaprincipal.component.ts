@@ -2,10 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {  SelectionModel  } from '@angular/cdk/collections';
 import {  MatTableDataSource } from '@angular/material/table';
-import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
 import { PostsI } from '../../../models/posts.interface';
-import { Observable } from 'rxjs';
 
 
 @Component({
@@ -51,12 +49,21 @@ export class BandejaprincipalComponent implements OnInit {
 
   ngOnInit(){
     this.getId();
-    // this.deleteAll();
-    // this.delete();
+    this.delId();
   }
 
   public getId() {
     let resp = this.messageService.bring();
     resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
   }
+
+  public delId() {
+    let resp = this.messageService.bring();
+    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
+  }
+
+
+
+
+
 }

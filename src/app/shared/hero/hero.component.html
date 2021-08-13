@@ -2,14 +2,14 @@
 
   <div class="hero">
       <div class="hero_banner">
-        <p>BANNER</p>
+        <p>Banner</p>
       </div>
 
       <div class="hero__ppal" *ngFor="let user of users">
-          <p>{{user.userName}}</p>
+          <p>{{user.userId}}</p>
       </div>
 
-    <a href="http://localhost:4200/login" (click)="onClick($event)">Cerrar Sesion</a>
+      <button class="ancho" mat-raised-button color="primary" (click)="redireccion()">Salir</button>
   </div>
 
 </section>

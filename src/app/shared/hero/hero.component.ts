@@ -15,11 +15,9 @@ export class HeroComponent implements OnInit {
 
   constructor(private router:Router, private usersService: UsersService) {}
 
-  onClick(event: Event): void {
-    event.preventDefault(); // Prevents browser following the link
-    this.UsersService.logout();
-    this.router.navigate(['login']);
-}
+  redireccion() {
+    this.router.navigate(["/login"])
+  }
 
   ngOnInit(): void{
     }

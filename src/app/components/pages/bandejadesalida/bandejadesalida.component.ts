@@ -22,7 +22,7 @@ export class BandejadesalidaComponent implements OnInit {
   constructor(private router: Router, private messageService: MessageService) {}
 
   ELEMENT_DATA!: PostsI [];
-  displayedColumns: string[] = ['select', 'id', 'title', 'body', 'userId'];
+  displayedColumns: string[] = ['select', 'to', 'userId', 'createdAt', 'body'];
   dataSource = new MatTableDataSource<PostsI>(this.ELEMENT_DATA);
   selection = new SelectionModel<PostsI>(true, []);
 

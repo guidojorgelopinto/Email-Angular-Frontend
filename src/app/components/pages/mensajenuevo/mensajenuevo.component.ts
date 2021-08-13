@@ -23,7 +23,7 @@ export class MensajenuevoComponent {
     this.messageForm = this.fb.group ({
       email: ['guido@gmail.com', [Validators.required]],
       asunto: ['Prueba', Validators.required],
-      text144: ['primerMesaje', Validators.required],
+      text144: ['Primer Mensaje', Validators.required],
     });
   }
 
