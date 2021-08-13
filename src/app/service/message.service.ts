@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PostsI } from '../models/posts.interface';
 import { BehaviorSubject, Observable, pipe, throwError } from "rxjs";
-
+import { UsersService } from '../service/users.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,18 +12,15 @@ export class MessageService {
 
   private URL = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private users: UsersService) { }
 
   public bring() {
-    return this.http.get<PostsI[]>(`${this.URL}/api/posts/`);
-  }
-
-  delete(id:any): Observable<any> {
-    return this.http.delete(`${this.URL}/api/posts/id`);
-  }
-
-  deleteAll(): Observable<any> {
-    return this.http.delete(`${this.URL}/api/posts/`);
+    const httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + <string>this.users.getToken()
+    })
+  };
+  return this.http.get<PostsI[]>(`${this.URL}/api/posts`, httpOptions);
   }
 
    //Enviar mensaje nuevo
@@ -74,3 +71,4 @@ export class MessageService {
 // }
 
   }
+

@@ -19,15 +19,14 @@ export class MensajenuevoComponent {
     private messageService: MessageService,
     private router: Router,
   ) {
-
     this.messageForm = this.fb.group ({
-      email: ['lopinto@gmail.com',Validators.required],
+      userId: ['guido@gmail.com', [Validators.required]],
       asunto: ['Prueba', Validators.required],
       text144: ['primerMesaje', Validators.required],
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit(){
   }
 
   sendMessage() {
@@ -40,7 +39,7 @@ export class MensajenuevoComponent {
         createdAt: "",
         updatedAt: "",
         to: "",
-        token: ""
+        token: "",
       }
       console.log(outMessage);
 

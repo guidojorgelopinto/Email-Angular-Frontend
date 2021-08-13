@@ -30,7 +30,7 @@ export class UsersService {
 
     signIn(authData: UserI): Observable <any> {
       return this.http
-      .post<UserI>(`${this.URL}/api/signin`, authData)
+      .post<UserI>(`${this.URL}/api/signin/`, authData)
       .pipe(
         map((res: UserI) => {
           this.saveToken(res.token);
@@ -65,7 +65,11 @@ export class UsersService {
       localStorage.setItem("token", token);
     }
 
-    signOut(): void {
+    public getToken() {
+      return localStorage.getItem('token');
+    }
+
+    logout(): void {
       localStorage.removeItem('token');
       this.loggedIn.next(false);
     }

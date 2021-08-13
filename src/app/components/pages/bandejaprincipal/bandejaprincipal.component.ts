@@ -50,7 +50,7 @@ export class BandejaprincipalComponent implements OnInit {
 
     ngOnInit(){
       this.getAllPosts();
-      this.deleteAll();
+      // this.deleteAll();
     }
 
     public getAllPosts() {

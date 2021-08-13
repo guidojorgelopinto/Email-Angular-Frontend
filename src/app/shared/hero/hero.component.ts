@@ -9,20 +9,18 @@ import { UserI } from '../../models/users.interface'
   styleUrls: ['./hero.component.scss']
 })
 export class HeroComponent implements OnInit {
+  [x: string]: any;
 
   users:UserI[] = []
 
   constructor(private router:Router, private usersService: UsersService) {}
 
+  onClick(event: Event): void {
+    event.preventDefault(); // Prevents browser following the link
+    this.UsersService.logout();
+    this.router.navigate(['login']);
+}
 
   ngOnInit(): void{
-      this.usersService.getAll().subscribe(
-        (        u: UserI[]) => this.users = u,
-      );
     }
-
-    signOut() {
-
-    }
-
 }
