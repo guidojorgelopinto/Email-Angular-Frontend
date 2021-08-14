@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import {  SelectionModel  } from '@angular/cdk/collections';
-import {  MatTableDataSource } from '@angular/material/table';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatTableDataSource } from '@angular/material/table';
 import { MessageService } from '@app/service/message.service';
 import { PostsI } from '../../../models/posts.interface';
 
@@ -57,9 +57,10 @@ export class BandejaprincipalComponent implements OnInit {
   }
 
   public delId() {
-    console.log('delId')
-    let resp = this.messageService.bring();
-    resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[]);
-    this.getId();
-  }
+    this.selection.selected.forEach((unMail) => {
+    this.messageService.delId(unMail.id)
+    .subscribe(() => console.log('1'));
+    });
+    }
+
 }

@@ -30,6 +30,10 @@ export class MensajenuevoComponent {
   ngOnInit(){
   }
 
+  redireccion() {
+    this.router.navigate(["/bandejaprincipal"])
+  }
+
   sendMessage() {
 
       const outMessage : PostsI = {

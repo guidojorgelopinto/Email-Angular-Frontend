@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import {  SelectionModel  } from '@angular/cdk/collections';
 import {  MatTableDataSource } from '@angular/material/table';
-import {  MatPaginator } from '@angular/material/paginator';
 import { MessageService } from '@app/service/message.service';
 import { PostsI } from '../../../models/posts.interface';
 
@@ -61,4 +60,11 @@ export class BandejadesalidaComponent implements OnInit {
     let resp = this.messageService.remit();
     resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
   }
+
+  public delId() {
+    this.selection.selected.forEach((unMail) => {
+    this.messageService.delId(unMail.id)
+    .subscribe(() => console.log('1'));
+    });
+    }
 }

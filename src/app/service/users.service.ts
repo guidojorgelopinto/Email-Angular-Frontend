@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { UserI} from "@app/models/users.interface";
 import { BehaviorSubject, Observable, pipe, throwError } from "rxjs";
-import { catchError, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 const helper = new JwtHelperService();
@@ -73,14 +73,5 @@ export class UsersService {
       localStorage.removeItem('token');
       this.loggedIn.next(false);
     }
-
-  // handleError(err: any): any {
-  //   throw new Error("Method not implemented.");
-  //   if (err) {
-  //     const errorMessage = `Error: code ${err.message}`;
-  //   }
-  //   window.alert(errorMessage);
-  //   return throwError(errorMessage);
-  // }
 }
 

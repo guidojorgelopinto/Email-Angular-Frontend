@@ -46,10 +46,14 @@ export class MessageService {
 
     //Eliminar mensaje
 
-  delId(id: any) {
-    return this.http
-    .delete(`${this.URL}/api/posts/${id}`)
-    }
+    delId(id: any) {
+      const httpOptions = {
+      headers: new HttpHeaders({
+      Authorization: 'Bearer ' + <string>this.users.getToken()
+      })
+      };
+      return this.http.delete<any>(`${this.URL}/api/posts/${id}`, httpOptions);
+      }
 
   private checkToken(): void {
 
