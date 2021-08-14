@@ -52,13 +52,13 @@ export class BandejadesalidaComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.getId();
+    this.remit();
     // this.deleteAll();
     // this.delete();
   }
 
-  public getId() {
-    let resp = this.messageService.bring();
+  public remit() {
+    let resp = this.messageService.remit();
     resp.subscribe((report: PostsI[]) =>this.dataSource.data = report as PostsI[])
   }
 }

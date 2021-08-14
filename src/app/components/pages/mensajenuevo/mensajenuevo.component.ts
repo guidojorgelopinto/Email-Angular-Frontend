@@ -44,8 +44,9 @@ export class MensajenuevoComponent {
       }
       console.log(outMessage);
 
-      this.messageService.sendMessage(outMessage);
-      this.falselogin();
+      this.messageService.sendMessage(outMessage)
+      .subscribe((pepe) => alert('Envío: ' + pepe.mensaje),
+      (pepe) => alert('Envío: ' + pepe.mensaje));
     }
 
     falselogin(){

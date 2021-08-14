@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PostsI } from '../models/posts.interface';
 import { BehaviorSubject, Observable, pipe, throwError } from "rxjs";
 import { UsersService } from '../service/users.service';
-import { catchError, map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -24,32 +24,32 @@ export class MessageService {
   return this.http.get<PostsI[]>(`${this.URL}/api/posts`, httpOptions);
   }
 
-   //Enviar mensaje nuevo
-
-  // sendMessage(authData: PostsI) {
-  //   return this.http
-  //   .post<PostsI>(`${this.URL}/api/posts/:id`, authData)
-  //   .pipe(
-  //     map((res: PostsI) => {
-  //       this.saveToken(res.token);
-  //       this.loggedIn.next(true);
-  //       return res;
-  //     }),
-
-  // );
-  // }
-
-  sendMessage(id: any) {
-    return this.http
-    .post(`${this.URL}/api/posts/${id}`)
-}
-
-     //Eliminar mensaje
-
-     delId(id: any) {
-      return this.http
-      .delete(`${this.URL}/api/posts/${id}`)
+  public remit() {
+    const httpOptions = {
+    headers: new HttpHeaders({
+      Authorization: 'Bearer ' + <string>this.users.getToken()
+    })
+  };
+  return this.http.get<PostsI[]>(`${this.URL}/api/posts-remit`, httpOptions);
   }
+
+    //Enviar mensaje nuevo
+
+    public sendMessage(mensaje: PostsI) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          Authorization: 'Bearer ' + <string>this.users.getToken()
+        })
+      };
+      return this.http.post<any>(`${this.URL}/api/posts`, mensaje, httpOptions);
+    }
+
+    //Eliminar mensaje
+
+  delId(id: any) {
+    return this.http
+    .delete(`${this.URL}/api/posts/${id}`)
+    }
 
   private checkToken(): void {
 
